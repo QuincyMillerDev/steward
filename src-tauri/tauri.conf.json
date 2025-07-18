@@ -1,20 +1,28 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "steward",
+  "productName": "Steward AI Assistant",
   "version": "0.1.0",
   "identifier": "com.coolio.steward",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "bun run build",
-    "frontendDist": "../dist"
+    "frontendDist": "../dist",
+    "beforeBundleCommand": "cd ../python-backend && pyinstaller --onefile main.py --distpath ../src-tauri/target/release/bundle/python"
   },
   "app": {
     "windows": [
       {
-        "title": "steward",
-        "width": 800,
-        "height": 600
+        "title": "Steward AI Assistant",
+        "width": 400,
+        "height": 300,
+        "resizable": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "decorations": false,
+        "transparent": true,
+        "center": true,
+        "visible": false
       }
     ],
     "security": {
@@ -30,6 +38,24 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "resources": [],
+    "category": "Utility",
+    "shortDescription": "AI desktop assistant for elderly users",
+    "longDescription": "Steward is a voice-controlled AI assistant designed specifically for elderly users, providing computer assistance with visual context understanding.",
+    "linux": {
+      "deb": {
+        "depends": ["libwebkit2gtk-4.1-0", "libssl3"]
+      }
+    },
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "10.15"
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
   }
 }
