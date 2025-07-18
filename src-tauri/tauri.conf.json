@@ -7,22 +7,21 @@
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "bun run build",
-    "frontendDist": "../dist",
-    "beforeBundleCommand": "cd ../python-backend && pyinstaller --onefile main.py --distpath ../src-tauri/target/release/bundle/python"
+    "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
         "title": "Steward AI Assistant",
-        "width": 400,
-        "height": 300,
+        "width": 300,
+        "height": 80,
         "resizable": false,
         "alwaysOnTop": true,
         "skipTaskbar": true,
         "decorations": false,
         "transparent": true,
-        "center": true,
-        "visible": false
+        "center": false,
+        "visible": true
       }
     ],
     "security": {

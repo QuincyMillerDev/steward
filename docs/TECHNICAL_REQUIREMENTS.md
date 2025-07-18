@@ -24,11 +24,11 @@
 
 ## 2. Technical Stack (Optimized for Speed)
 
-### Frontend Framework: **Tauri + React**
+### Frontend Framework: **Tauri + React + Tailwind CSS**
 
 - **Why:** Lightweight (~10MB), native performance, built-in system APIs
-- **UI Library:** Mantine UI (pre-built accessible components)
-- **Styling:** Tailwind CSS (rapid prototyping)
+- **UI Framework:** React with Tailwind CSS (rapid prototyping, lightweight)
+- **Styling:** Tailwind CSS with custom elderly-optimized design tokens
 
 ### Backend Architecture:
 
@@ -71,7 +71,6 @@ python-multipart==0.0.6
 {
   "dependencies": {
     "@tauri-apps/api": "^2.0",
-    "@mantine/core": "^7.0",
     "react": "^18.2",
     "react-use": "^17.4"
   }
