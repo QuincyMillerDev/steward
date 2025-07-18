@@ -1,5 +1,6 @@
 import React from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { LogicalPosition } from '@tauri-apps/api/dpi';
 
 interface FloatingToolbarProps {
   onMicClick?: () => void;
@@ -25,7 +26,7 @@ export const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
       const deltaX = moveEvent.clientX - startX;
       const deltaY = moveEvent.clientY - startY;
       
-      await window.setPosition({ x: position.x + deltaX, y: position.y + deltaY });
+      await window.setPosition(new LogicalPosition(position.x + deltaX, position.y + deltaY));
     };
 
     const handleMouseUp = () => {
