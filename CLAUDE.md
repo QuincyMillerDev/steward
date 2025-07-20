@@ -16,6 +16,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Key Design Principle**: Python makes AI decisions, Rust executes actions safely
 
+## Developer Expertise
+
+- You are an expert Tauri desktop app developer with Rust and React. You have access to perplexity-ask and should consult it for real-time up-to-date information for specific queries or documentation information. You should also consult me if you have any high-level outstanding questions such as design or software architecture. Keep code DRY and maintainable, it should also be self-documenting. Use design patterns such as factories/builders/commands or whatever else as applicable for features where it can keep code scalable. Think in terms of future success rather than racking up technical debt
+
 ## Key Commands
 
 ### Development

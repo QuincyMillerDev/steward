@@ -13,19 +13,27 @@
     "windows": [
       {
         "title": "Steward AI Assistant",
-        "width": 300,
-        "height": 80,
+        "width": 420,
+        "height": 60,
         "resizable": false,
         "alwaysOnTop": true,
-        "skipTaskbar": true,
+        "skipTaskbar": false,
         "decorations": false,
         "transparent": true,
-        "center": false,
-        "visible": true
+        "shadow": false,
+        "center": true,
+        "visible": true,
+        "fullscreen": false,
+        "maximized": false,
+        "acceptFirstMouse": true
       }
     ],
     "security": {
       "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
     }
   },
   "bundle": {

@@ -24,7 +24,7 @@
 
 ## 2. Technical Stack (Optimized for Speed)
 
-### Frontend Framework: **Tauri + React + Tailwind CSS**
+### Frontend Framework: **Tauri 2.0 + React + Tailwind CSS**
 
 - **Why:** Lightweight (~10MB), native performance, built-in system APIs
 - **UI Framework:** React with Tailwind CSS (rapid prototyping, lightweight)
@@ -63,7 +63,6 @@ openai==1.3.0
 pillow==10.1.0
 pydantic==2.5.0
 python-multipart==0.0.6
-# Note: PyAutoGUI removed - using Rust enigo instead
 ```
 
 ### Package.json (React frontend)
