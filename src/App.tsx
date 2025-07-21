@@ -1,84 +1,59 @@
-import { useEffect } from "react";
-import { useAppState } from "./hooks/use-app-state";
-import { ToolbarWindow } from "./components/ToolbarWindow";
-import { ResponseWindow } from "./components/ResponseWindow";
-import { SettingsWindow } from "./components/SettingsWindow";
-import "./styles/globals.css";
 
 function App() {
-  const [state, dispatch] = useAppState();
-  
-  // Check if this is a standalone page window
-  const urlParams = new URLSearchParams(window.location.search);
-  const pageParam = urlParams.get('page');
-
-  // Tauri event listeners - Replace with actual implementation
-  useEffect(() => {
-    // TODO: Set up Tauri event listeners
-    // Example:
-    // listen('audio_level_update', (event) => {
-    //   dispatch({ type: 'UPDATE_AUDIO_LEVEL', level: event.payload })
-    // })
-    //
-    // listen('ai_response', (event) => {
-    //   dispatch({ type: 'SHOW_RESPONSE', content: event.payload })
-    // })
-    //
-    // listen('confirmation_request', (event) => {
-    //   dispatch({ type: 'REQUEST_CONFIRMATION', action: event.payload })
-    // })
-
-    return () => {
-      // TODO: Clean up Tauri listeners
-    };
-  }, [dispatch]);
-
-  // Global keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.code === "Space") {
-        e.preventDefault();
-        if (state.currentState === "listening") {
-          dispatch({ type: "STOP_LISTENING" });
-        } else if (state.currentState === "idle") {
-          dispatch({ type: "START_LISTENING" });
-        }
-      } else if (e.ctrlKey && e.code === "Comma") {
-        e.preventDefault();
-        dispatch({ type: "OPEN_SETTINGS" });
-      } else if (e.code === "Escape") {
-        e.preventDefault();
-        if (state.currentState === "processing" || state.currentState === "waiting-confirmation") {
-          dispatch({ type: "STOP_LISTENING" });
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state.currentState, dispatch]);
-
-  // Render standalone settings/help window or main toolbar interface
-  if (pageParam === 'settings-help') {
-    return (
-      <div className="w-screen h-screen bg-gray-950 flex items-center justify-center p-4">
-        <SettingsWindow dispatch={dispatch} />
-      </div>
-    );
-  }
-
-  // Main toolbar interface
   return (
-    <div className="w-full h-[60px] bg-transparent">
-      <ToolbarWindow state={state} dispatch={dispatch} />
-      <ResponseWindow state={state} dispatch={dispatch} />
-
-      {(state.currentState === "settings" || state.currentState === "help") && (
-        <SettingsWindow 
-          dispatch={dispatch} 
-          defaultTab={state.currentState === "settings" ? "settings" : "help"} 
-        />
-      )}
+    <div className="min-h-screen bg-primary text-text-primary p-8">
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-center mb-4">
+            Steward AI Desktop Assistant
+          </h1>
+          <p className="text-lg text-text-secondary text-center">
+            Your intelligent desktop companion for elderly users
+          </p>
+        </header>
+        
+        <main className="space-y-8">
+          <div className="card text-center">
+            <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
+            <p className="text-readable text-text-secondary mb-6">
+              Welcome to Steward! This is a clean slate React application with TailwindCSS 
+              configured for elderly-friendly design patterns.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <button className="btn-primary clickable-area">
+                Primary Button
+              </button>
+              <button className="btn-secondary clickable-area">
+                Secondary Button
+              </button>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="card">
+              <h3 className="text-xl font-semibold mb-3">Features Ready</h3>
+              <ul className="space-y-2 text-readable">
+                <li>✅ TailwindCSS with elderly-friendly themes</li>
+                <li>✅ Headless UI components available</li>
+                <li>✅ Tauri 2.0 desktop integration</li>
+                <li>✅ TypeScript configuration</li>
+                <li>✅ Accessibility-first design system</li>
+              </ul>
+            </div>
+            
+            <div className="card">
+              <h3 className="text-xl font-semibold mb-3">Next Steps</h3>
+              <ul className="space-y-2 text-readable">
+                <li>🔧 Implement floating overlay toolbar</li>
+                <li>🎤 Add voice input functionality</li>
+                <li>🤖 Integrate AI processing pipeline</li>
+                <li>📱 Build responsive component library</li>
+                <li>🎨 Add theme switching system</li>
+              </ul>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
