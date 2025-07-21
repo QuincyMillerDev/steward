@@ -2,6 +2,7 @@
 import { Button } from '@headlessui/react';
 import { HiCog6Tooth } from 'react-icons/hi2';
 import { MdOutlineDragIndicator } from "react-icons/md";
+import { invoke } from '@tauri-apps/api/core';
 import MicrophoneButton from './MicrophoneButton';
 
 interface ToolbarProps {
@@ -9,14 +10,21 @@ interface ToolbarProps {
   subtitle?: string;
   isRecording?: boolean;
   onRecordClick?: () => void;
-  onSettingsClick?: () => void;
 }
 
 export default function Toolbar({ 
   isRecording = false,
-  onRecordClick,
-  onSettingsClick
+  onRecordClick
 }: ToolbarProps) {
+
+  const handleSettingsClick = async () => {
+    try {
+      await invoke('create_settings_window');
+    } catch (error) {
+      console.error('Failed to open settings window:', error);
+    }
+  };
+
   return (
     <div 
       className="relative flex items-center transition-colors select-none"
@@ -68,7 +76,7 @@ export default function Toolbar({
           e.currentTarget.style.backgroundColor = 'transparent';
         }}
         aria-label="Open settings"
-        onClick={onSettingsClick}
+        onClick={handleSettingsClick}
       >
         <HiCog6Tooth className="w-4 h-4" />
       </Button>
