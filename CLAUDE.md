@@ -67,3 +67,6 @@ User Voice → Tauri (Rust) → Python (AI Decision) → Tauri (Rust Execution)
 - Basic automation: mouse clicks, typing, browser navigation
 - Safety confirmation prompts
 - Local data storage (no cloud sync)
+
+## Code Style Guidelines
+- Always add a comment to the top of every file with a 1 line description of the file.

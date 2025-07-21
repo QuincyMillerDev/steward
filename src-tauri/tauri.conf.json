@@ -12,9 +12,17 @@
   "app": {
     "windows": [
       {
-        "title": "steward",
-        "width": 800,
-        "height": 600
+        "label": "toolbar",
+        "width": 260,
+        "height": 56,
+        "decorations": false,
+        "transparent": true,
+        "resizable": false,
+        "fullscreen": false,
+        "center": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": true
       }
     ],
     "security": {
