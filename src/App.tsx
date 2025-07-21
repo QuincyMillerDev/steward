@@ -61,7 +61,7 @@ function App() {
   // Render standalone settings/help window or main toolbar interface
   if (pageParam === 'settings-help') {
     return (
-      <div className="w-screen h-screen bg-[hsl(var(--background))] dark:bg-[hsl(var(--background))] flex items-center justify-center p-4">
+      <div className="w-screen h-screen bg-gray-950 flex items-center justify-center p-4">
         <SettingsWindow dispatch={dispatch} />
       </div>
     );

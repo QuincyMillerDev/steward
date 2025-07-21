@@ -15,8 +15,8 @@ export default {
         'elderly': '3rem', // 48px touch targets
       },
       colors: {
-        'elderly-primary': '#2563eb',
-        'elderly-bg': 'rgba(0, 0, 0, 0.8)',
+        'elderly-primary': '#3b82f6',
+        'elderly-bg': 'rgba(10, 11, 13, 0.95)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -50,22 +50,33 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))'
+        
+        // Additional Raycast-inspired grays for direct use
+        gray: {
+          50: 'hsl(var(--gray-50))',
+          100: 'hsl(var(--gray-100))',
+          200: 'hsl(var(--gray-200))',
+          300: 'hsl(var(--gray-300))',
+          400: 'hsl(var(--gray-400))',
+          500: 'hsl(var(--gray-500))',
+          600: 'hsl(var(--gray-600))',
+          700: 'hsl(var(--gray-700))',
+          800: 'hsl(var(--gray-800))',
+          900: 'hsl(var(--gray-900))',
+          950: 'hsl(var(--gray-950))',
         },
-        sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))'
+        blue: {
+          500: 'hsl(var(--blue-500))',
+          600: 'hsl(var(--blue-600))',
+        },
+        red: {
+          500: 'hsl(var(--red-500))',
+        },
+        green: {
+          500: 'hsl(var(--green-500))',
+        },
+        amber: {
+          500: 'hsl(var(--amber-500))',
         }
       },
       borderRadius: {

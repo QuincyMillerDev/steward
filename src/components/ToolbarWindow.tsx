@@ -1,5 +1,5 @@
 import type React from "react"
-import { useState, useRef } from "react"
+import { useRef } from "react"
 import { IconMicrophone, IconSettings, IconPlayerStop, IconX } from "@tabler/icons-react"
 import { WaveformAnimation } from "./WaveformAnimation"
 import { getCurrentWindow } from "@tauri-apps/api/window"
@@ -86,7 +86,7 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
   return (
     <div
       ref={toolbarRef}
-      className="flex items-center bg-white/95 dark:bg-[hsl(var(--card))] backdrop-blur-md border border-[hsl(var(--border))] rounded-2xl shadow-lg transition-all duration-200 w-full h-[60px] overflow-hidden"
+      className="flex items-center bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl transition-all duration-200 w-full h-[60px] overflow-hidden"
     >
       {/* Drag Handle */}
       <div
@@ -98,7 +98,7 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
       >
         <div className="grid grid-cols-3 gap-1 pointer-events-none">
           {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="w-1 h-1 bg-[hsl(var(--muted-foreground))] rounded-full" />
+            <div key={i} className="w-1 h-1 bg-gray-500 rounded-full" />
           ))}
         </div>
       </div>
@@ -109,7 +109,7 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
         {showStopButton && (
           <button
             onClick={handleStopAgent}
-            className="flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-200 ease-in-out bg-[hsl(var(--destructive))] hover:bg-[hsl(var(--destructive))]/90 active:bg-[hsl(var(--destructive))]/80 text-[hsl(var(--destructive-foreground))] shadow-lg focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50 focus:ring-offset-2"
+            className="flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-200 ease-in-out bg-red-500 hover:bg-red-500/90 active:bg-red-500/80 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
             aria-label="Stop Steward"
           >
             <IconPlayerStop className="w-6 h-6" />
@@ -124,11 +124,11 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
             flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-200 ease-in-out
             ${
               state.currentState === "listening"
-                ? "bg-[hsl(var(--destructive))] hover:bg-[hsl(var(--destructive))]/90 active:bg-[hsl(var(--destructive))]/80 text-[hsl(var(--destructive-foreground))] shadow-lg"
-                : "bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 active:bg-[hsl(var(--primary))]/80 text-[hsl(var(--primary-foreground))] shadow-lg"
+                ? "bg-red-500 hover:bg-red-500/90 active:bg-red-500/80 text-white shadow-lg"
+                : "bg-blue-500 hover:bg-blue-500/90 active:bg-blue-500/80 text-white shadow-lg"
             }
             disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-opacity-100
-            focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50 focus:ring-offset-2
+            focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900
           `}
           aria-label={state.currentState === "listening" ? "Stop listening" : "Start listening"}
         >
@@ -144,7 +144,7 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
         {/* Settings Button */}
         <button
           onClick={handleOpenSettings}
-          className="flex items-center justify-center w-10 h-10 text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))] active:bg-[hsl(var(--muted))]/80 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50"
+          className="flex items-center justify-center w-10 h-10 text-gray-400 hover:bg-gray-800 hover:text-gray-200 active:bg-gray-800/80 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
           aria-label="Open settings"
         >
           <IconSettings className="w-5 h-5" />
@@ -153,7 +153,7 @@ export function ToolbarWindow({ state, dispatch }: ToolbarWindowProps) {
         {/* Close Button */}
         <button
           onClick={handleCloseApp}
-          className="flex items-center justify-center w-10 h-10 text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))] active:bg-[hsl(var(--muted))]/80 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50"
+          className="flex items-center justify-center w-10 h-10 text-gray-400 hover:bg-gray-800 hover:text-gray-200 active:bg-gray-800/80 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
           aria-label="Close application"
         >
           <IconX className="w-5 h-5" />

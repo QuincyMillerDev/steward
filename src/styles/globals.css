@@ -1,70 +1,77 @@
 @import "tailwindcss";
 
-/* Custom CSS variables for the design system */
+/* Raycast-inspired minimal dark theme */
 :root {
-  /* Ocean Color Palette - Light Mode */
-  --ocean-deep: 197 32% 27%; /* #264653 */
-  --ocean-teal: 171 45% 42%; /* #2A9D8F */
-  --ocean-gold: 40 75% 67%; /* #E9C46A */
-  --ocean-coral: 24 84% 67%; /* #F4A261 */
-  --ocean-terracotta: 10 71% 59%; /* #E76F51 */
+  /* Core neutral grays */
+  --gray-50: 220 14% 96%;   /* #f6f6f7 */
+  --gray-100: 220 13% 91%;  /* #e8e9ea */
+  --gray-200: 220 9% 78%;   /* #c0c1c2 */
+  --gray-300: 220 9% 65%;   /* #9d9fa1 */
+  --gray-400: 220 9% 56%;   /* #87898c */
+  --gray-500: 220 9% 46%;   /* #6e7073 */
+  --gray-600: 220 9% 34%;   /* #515356 */
+  --gray-700: 220 13% 26%;  /* #3f4245 */
+  --gray-800: 220 27% 18%;  /* #242629 */
+  --gray-900: 220 39% 11%;  /* #16181a */
+  --gray-950: 220 65% 6%;   /* #0a0b0d */
   
-  /* Extended Ocean Colors */
-  --ocean-light-teal: 171 45% 52%;
-  --ocean-light-gold: 40 75% 77%;
-  --ocean-light-coral: 24 84% 77%;
-  --ocean-mist: 210 33% 97%; /* #F8FAFB */
-  --ocean-deep-text: 197 32% 17%;
+  /* Accent colors */
+  --blue-500: 217 91% 60%;    /* #3b82f6 - Primary accent */
+  --blue-600: 221 83% 53%;    /* #2563eb */
+  --red-500: 0 84% 60%;       /* #ef4444 - Destructive */
+  --green-500: 142 76% 36%;   /* #22c55e - Success */
+  --amber-500: 43 96% 56%;    /* #f59e0b - Warning */
   
-  /* Light Mode Variables */
-  --background: var(--ocean-mist);
-  --foreground: var(--ocean-deep-text);
+  /* Light mode */
+  --background: var(--gray-50);
+  --foreground: var(--gray-900);
   --card: 0 0% 100%;
-  --card-foreground: var(--ocean-deep-text);
+  --card-foreground: var(--gray-900);
   --popover: 0 0% 100%;
-  --popover-foreground: var(--ocean-deep-text);
-  --primary: var(--ocean-teal);
+  --popover-foreground: var(--gray-900);
+  --primary: var(--blue-500);
   --primary-foreground: 0 0% 100%;
-  --secondary: var(--ocean-gold);
-  --secondary-foreground: var(--ocean-deep-text);
-  --muted: 210 33% 95%;
-  --muted-foreground: 197 25% 45%;
-  --accent: var(--ocean-coral);
+  --secondary: var(--gray-100);
+  --secondary-foreground: var(--gray-900);
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-500);
+  --accent: var(--blue-500);
   --accent-foreground: 0 0% 100%;
-  --destructive: var(--ocean-terracotta);
+  --destructive: var(--red-500);
   --destructive-foreground: 0 0% 100%;
-  --border: 197 20% 85%;
-  --input: 197 20% 90%;
-  --ring: var(--ocean-teal);
-  --radius: 0.5rem;
+  --border: var(--gray-200);
+  --input: var(--gray-100);
+  --ring: var(--blue-500);
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* Ocean Color Palette - Dark Mode */
-  --background: var(--ocean-deep);
-  --foreground: 0 0% 98%;
-  --card: 197 32% 22%;
-  --card-foreground: 0 0% 98%;
-  --popover: 197 32% 22%;
-  --popover-foreground: 0 0% 98%;
-  --primary: var(--ocean-teal);
+  /* Dark mode - Raycast inspired */
+  --background: var(--gray-950);
+  --foreground: var(--gray-50);
+  --card: var(--gray-900);
+  --card-foreground: var(--gray-50);
+  --popover: var(--gray-900);
+  --popover-foreground: var(--gray-50);
+  --primary: var(--blue-500);
   --primary-foreground: 0 0% 100%;
-  --secondary: var(--ocean-gold);
-  --secondary-foreground: var(--ocean-deep-text);
-  --muted: 197 32% 25%;
-  --muted-foreground: 197 20% 75%;
-  --accent: var(--ocean-coral);
+  --secondary: var(--gray-800);
+  --secondary-foreground: var(--gray-50);
+  --muted: var(--gray-800);
+  --muted-foreground: var(--gray-400);
+  --accent: var(--blue-500);
   --accent-foreground: 0 0% 100%;
-  --destructive: var(--ocean-terracotta);
+  --destructive: var(--red-500);
   --destructive-foreground: 0 0% 100%;
-  --border: 197 20% 30%;
-  --input: 197 20% 25%;
-  --ring: var(--ocean-teal);
+  --border: var(--gray-800);
+  --input: var(--gray-800);
+  --ring: var(--blue-500);
 }
 
 /* Base styles */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI Variable', 'Segoe UI', system-ui, Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-feature-settings: 'cv01', 'cv03', 'cv04', 'cv11';
   background: transparent !important;
   color: hsl(var(--foreground));
   margin: 0;
@@ -74,6 +81,8 @@ body {
   user-select: none;
   transform: translateZ(0);
   backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {

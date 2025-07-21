@@ -10,7 +10,7 @@ interface SettingsWindowProps {
   defaultTab?: "settings" | "help";
 }
 
-export function SettingsWindow({ dispatch, defaultTab = "settings" }: SettingsWindowProps) {
+export function SettingsWindow({ defaultTab = "settings" }: SettingsWindowProps) {
   // Check if this is a standalone window
   const urlParams = new URLSearchParams(window.location.search);
   const isStandalone = urlParams.get('page') === 'settings-help';
@@ -28,10 +28,10 @@ export function SettingsWindow({ dispatch, defaultTab = "settings" }: SettingsWi
   }) => (
     <button
       onClick={() => setActiveTab(tab)}
-      className={`flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+      className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
         activeTab === tab
-          ? "bg-[hsl(var(--accent))]/20 text-[hsl(var(--accent))] dark:bg-[hsl(var(--accent))]/10"
-          : "text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted))]/50"
+          ? "bg-gray-800 text-gray-50 shadow-sm"
+          : "text-gray-400 hover:text-gray-200 hover:bg-gray-800/50"
       }`}
     >
       <Icon className="w-4 h-4" />
@@ -42,8 +42,8 @@ export function SettingsWindow({ dispatch, defaultTab = "settings" }: SettingsWi
   const content = (
     <>
       {/* Tab Navigation */}
-      <div className="border-b border-[hsl(var(--border))]">
-        <div className="flex gap-2 p-4">
+      <div className="border-b border-gray-800">
+        <div className="flex gap-1 p-4">
           <TabButton tab="settings" label="Settings" icon={Settings} />
           <TabButton tab="help" label="Help" icon={HelpCircle} />
         </div>
@@ -64,10 +64,10 @@ export function SettingsWindow({ dispatch, defaultTab = "settings" }: SettingsWi
 
   if (isStandalone) {
     return (
-      <div className="bg-white/95 dark:bg-[hsl(var(--card))] rounded-2xl shadow-lg w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center p-6 border-b border-[hsl(var(--border))]">
-          <h2 className="text-2xl font-bold text-[hsl(var(--foreground))]">
+        <div className="flex items-center p-6 border-b border-gray-800">
+          <h2 className="text-xl font-semibold text-gray-50">
             {activeTab === "settings" ? "Settings" : "Help"}
           </h2>
         </div>
@@ -79,11 +79,11 @@ export function SettingsWindow({ dispatch, defaultTab = "settings" }: SettingsWi
 
   // Modal version for overlay
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-      <div className="bg-white/95 dark:bg-[hsl(var(--card))] rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 bg-gray-950/60 backdrop-blur-sm flex items-center justify-center">
+      <div className="bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center p-6 border-b border-[hsl(var(--border))]">
-          <h2 className="text-2xl font-bold text-[hsl(var(--foreground))]">
+        <div className="flex items-center p-6 border-b border-gray-800">
+          <h2 className="text-xl font-semibold text-gray-50">
             {activeTab === "settings" ? "Settings" : "Help"}
           </h2>
         </div>

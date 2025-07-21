@@ -26,7 +26,7 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
 
   return (
     <div
-      className="fixed z-40 bg-[hsl(var(--card))] backdrop-blur-md border border-[hsl(var(--border))] rounded-2xl shadow-xl transition-all duration-200"
+      className="fixed z-40 bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl transition-all duration-200"
       style={{
         left: "0px",
         top: "80px",
@@ -38,14 +38,14 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
       {/* Header with minimal Steward branding */}
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
         <div className="flex items-center gap-1">
-          <div className="w-2 h-2 bg-[hsl(var(--ocean-gold))] rounded-full" />
-          <span className="text-xs font-medium text-[hsl(var(--muted-foreground))]">Steward</span>
+          <div className="w-2 h-2 bg-blue-500 rounded-full" />
+          <span className="text-xs font-medium text-gray-400">Steward</span>
         </div>
         
         {/* Close button */}
         <button
           onClick={() => dispatch({ type: "DISMISS_RESPONSE" })}
-          className="flex items-center justify-center w-6 h-6 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted))] rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50"
+          className="flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-200 hover:bg-gray-800 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           aria-label="Close response"
         >
           <IconX className="w-3 h-3" />
@@ -55,25 +55,25 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
       {/* Content */}
       <div className="p-4 pr-4 max-h-64 overflow-y-auto">
         {isStreaming ? (
-          <div className="flex items-center gap-2 text-[hsl(var(--muted-foreground))]">
+          <div className="flex items-center gap-2 text-gray-400">
             <div className="flex gap-1">
-              <div className="w-2 h-2 bg-[hsl(var(--ocean-gold))] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-              <div className="w-2 h-2 bg-[hsl(var(--ocean-gold))] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-              <div className="w-2 h-2 bg-[hsl(var(--ocean-gold))] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
             <span className="text-sm font-medium">Thinking...</span>
           </div>
         ) : (
-          <p className="text-[hsl(var(--foreground))] text-base leading-relaxed">{state.responseContent}</p>
+          <p className="text-gray-100 text-base leading-relaxed">{state.responseContent}</p>
         )}
       </div>
 
       {/* Confirmation Actions */}
       {state.confirmationAction && (
-        <div className="p-4 border-t border-[hsl(var(--border))] bg-[hsl(var(--muted))]/50 rounded-b-2xl">
+        <div className="p-4 border-t border-gray-800 bg-gray-800/50 rounded-b-2xl">
           <div className="mb-4">
-            <p className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">I want to:</p>
-            <p className="text-sm text-[hsl(var(--foreground))] bg-[hsl(var(--background))] p-3 rounded-lg leading-relaxed border border-[hsl(var(--border))]">
+            <p className="text-sm font-medium text-gray-100 mb-2">I want to:</p>
+            <p className="text-sm text-gray-100 bg-gray-950 p-3 rounded-lg leading-relaxed border border-gray-800">
               {state.confirmationAction.description}
             </p>
           </div>
@@ -81,7 +81,7 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
           <div className="flex flex-col gap-2">
             <button
               onClick={() => handleConfirmAction(true)}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 active:bg-[hsl(var(--primary))]/80 text-[hsl(var(--primary-foreground))] rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-blue-500 hover:bg-blue-500/90 active:bg-blue-500/80 text-white rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               <IconCheck className="w-4 h-4" />
               Yes, approve
@@ -89,7 +89,7 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
 
             <button
               onClick={() => handleConfirmAction(true, true)}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--secondary))]/90 active:bg-[hsl(var(--secondary))]/80 text-[hsl(var(--secondary-foreground))] rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-gray-700 hover:bg-gray-700/90 active:bg-gray-700/80 text-white rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               <IconCheck className="w-4 h-4" />
               Yes, and don't ask again
@@ -97,7 +97,7 @@ export function ResponseWindow({ state, dispatch }: ResponseWindowProps) {
 
             <button
               onClick={handleRejectAndRestart}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))]/90 active:bg-[hsl(var(--accent))]/80 text-[hsl(var(--accent-foreground))] rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]/50 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-amber-500 hover:bg-amber-500/90 active:bg-amber-500/80 text-white rounded-lg transition-all duration-200 font-medium shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               <IconRotateClockwise className="w-4 h-4" />
               No, let me tell you what to do
