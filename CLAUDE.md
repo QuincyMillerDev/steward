@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Steward is an AI desktop assistant for elderly users built with Tauri 2.0 + React + TypeScript. The application provides voice-controlled desktop automation through a floating overlay toolbar.
+Steward is an AI Agent desktop assistant for interacting with your own desktop environment with natural language with Tauri 2.0 + React + TypeScript. The application provides voice-controlled desktop automation through a floating overlay toolbar.
 
 ## Development Commands
 

@@ -14,6 +14,7 @@
 - React
 - TailwindCSS
 - Headless UI
+- React-icons
 - Rust `enigo` library for desktop actions
 - Python FASTAPI + Langchain for AI related development (setup as a sidecar)
 - SQLite for local session storage
@@ -59,16 +60,16 @@ We will support out-of-the-box color themes optimized for elderly users with hig
 | **Light Mode** | #ffffff | #f9fafb | #2563eb | #111827 | #4b5563 | #e5e7eb |
 
 ### Agent Flow Mockups
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
+![alt text](./images/image.png)
+![alt text](./images/image-1.png)
+![alt text](./images/image-2.png)
+![alt text](./images/image-3.png)
+![alt text](./images/image-4.png)
+![alt text](./images/image-5.png)
+![alt text](./images/image-6.png)
 
 ### Settings Page Mockup
-![alt text](image-7.png)
+![alt text](./images/image-7.png)
 
 ## Testing Scenarios (MVP Must-Haves)
 

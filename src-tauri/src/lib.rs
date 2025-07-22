@@ -9,18 +9,16 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 async fn create_settings_window(app: tauri::AppHandle) -> Result<(), String> {
-    // Check if settings window already exists
     if let Some(existing) = app.get_webview_window("settings") {
-        // Focus existing window
         let _ = existing.set_focus();
         return Ok(());
     }
 
-    // Create new settings window
     let _settings_window = WebviewWindowBuilder::new(&app, "settings", WebviewUrl::App("settings.html".into()))
         .title("Steward Settings")
-        .inner_size(600.0, 400.0)
-        .min_inner_size(400.0, 300.0)
+        .inner_size(600.0, 500.0)
+        .min_inner_size(500.0, 400.0)
+        .max_inner_size(800.0, 600.0)
         .center()
         .resizable(true)
         .decorations(true)
