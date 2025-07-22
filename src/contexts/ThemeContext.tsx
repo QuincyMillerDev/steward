@@ -1,115 +1,73 @@
-// Enhanced ThemeContext using ThemeRegistry for centralized theme management
-import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
-import { themeRegistry } from '../lib/theme/registry';
-import type { ThemeState, ThemeContextValue } from '../lib/theme/types';
+// Theme context provider for managing UI themes and color schemes - Modular DRY approach
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { allThemes, type ThemeName, getSystemTheme } from '../lib/themeConfig';
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+interface ThemeContextType {
+  currentTheme: ThemeName;
+  setTheme: (theme: ThemeName) => void;
+  availableThemes: { name: ThemeName; label: string }[];
+  isAuto: boolean;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 interface ThemeProviderProps {
   children: ReactNode;
+  defaultTheme?: ThemeName;
 }
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [themeState, setThemeState] = useState<ThemeState>({
-    currentTheme: 'auto',
-    effectiveTheme: 'dark-grayscale',
-    systemTheme: themeRegistry.getSystemTheme(),
-    isAuto: true,
-    isLoading: true,
-    accessibility: {
-      wcagCompliance: 'AA',
-      minimumFontSize: 16,
-      highContrast: false,
-      reducedMotion: false,
-    },
-  });
+export function ThemeProvider({ children, defaultTheme = 'dark-grayscale' }: ThemeProviderProps) {
+  const [currentTheme, setCurrentTheme] = useState<ThemeName>(defaultTheme);
 
-  // Initialize theme registry on mount
+  // Load saved theme on mount
   useEffect(() => {
-    const initializeTheme = async () => {
-      try {
-        await themeRegistry.initialize();
-        
-        const currentTheme = themeRegistry.getCurrentTheme();
-        const effectiveTheme = themeRegistry.getEffectiveTheme();
-        const systemTheme = themeRegistry.getSystemTheme();
-        const themeConfig = themeRegistry.getThemeConfig(effectiveTheme);
-        
-        setThemeState({
-          currentTheme,
-          effectiveTheme,
-          systemTheme,
-          isAuto: currentTheme === 'auto',
-          isLoading: false,
-          accessibility: themeConfig?.accessibility || {
-            wcagCompliance: 'AA',
-            minimumFontSize: 16,
-            highContrast: false,
-            reducedMotion: false,
-          },
-        });
-      } catch (error) {
-        console.error('Failed to initialize theme:', error);
-        setThemeState(prev => ({ ...prev, isLoading: false }));
+    const savedTheme = localStorage.getItem('steward-theme') as ThemeName;
+    if (savedTheme && allThemes.some(t => t.name === savedTheme)) {
+      setCurrentTheme(savedTheme);
+    }
+  }, []);
+
+  // Apply theme to document
+  useEffect(() => {
+    const applyTheme = () => {
+      let effectiveTheme: ThemeName;
+      
+      if (currentTheme === 'auto') {
+        effectiveTheme = getSystemTheme();
+      } else {
+        effectiveTheme = currentTheme;
       }
+      
+      // Set data-theme attribute for CSS selectors
+      document.documentElement.setAttribute('data-theme', effectiveTheme);
+      
+      // Save preference
+      localStorage.setItem('steward-theme', currentTheme);
     };
 
-    initializeTheme();
-  }, []);
+    applyTheme();
 
-  // Listen for theme changes
-  useEffect(() => {
-    const unsubscribe = themeRegistry.addThemeChangeListener((event) => {
-      const currentTheme = themeRegistry.getCurrentTheme();
-      const effectiveTheme = themeRegistry.getEffectiveTheme();
-      const systemTheme = themeRegistry.getSystemTheme();
-      const themeConfig = themeRegistry.getThemeConfig(effectiveTheme);
-
-      setThemeState(prev => ({
-        ...prev,
-        currentTheme,
-        effectiveTheme,
-        systemTheme,
-        isAuto: currentTheme === 'auto',
-        accessibility: themeConfig?.accessibility || prev.accessibility,
-      }));
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const setTheme = useCallback(async (theme: string) => {
-    try {
-      await themeRegistry.setTheme(theme);
-    } catch (error) {
-      console.error('Failed to set theme:', error);
+    // Listen for system theme changes when in auto mode
+    if (currentTheme === 'auto') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = () => applyTheme();
+      
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
     }
-  }, []);
+  }, [currentTheme]);
 
-  const setAuto = useCallback(async (enabled: boolean) => {
-    try {
-      await themeRegistry.setAuto(enabled);
-    } catch (error) {
-      console.error('Failed to set auto theme:', error);
-    }
-  }, []);
-
-  const updateAccessibility = useCallback(async (config: Partial<ThemeState['accessibility']>) => {
-    // This would need to be implemented based on the specific accessibility features
-    console.warn('updateAccessibility not yet implemented');
-  }, []);
-
-  const value: ThemeContextValue = {
-    ...themeState,
-    setTheme,
-    setAuto,
-    updateAccessibility,
-    availableThemes: themeRegistry.listThemes(),
-    getThemeConfig: themeRegistry.getThemeConfig,
+  const setTheme = (theme: ThemeName) => {
+    setCurrentTheme(theme);
   };
 
   return (
-    <ThemeContext.Provider value={value}>
+    <ThemeContext.Provider value={{
+      currentTheme,
+      setTheme,
+      availableThemes: allThemes,
+      isAuto: currentTheme === 'auto',
+    }}>
       {children}
     </ThemeContext.Provider>
   );
