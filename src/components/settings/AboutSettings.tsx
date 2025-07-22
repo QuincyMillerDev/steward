@@ -1,5 +1,5 @@
 // About settings component for app information
-import { FaGithub, FaBook, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaBook } from 'react-icons/fa';
 
 export default function AboutSettings() {
   return (
@@ -79,18 +79,6 @@ export default function AboutSettings() {
               <span className="text-sm">GitHub Repository</span>
             </a>
           </div>
-        </div>
-
-        {/* Credits */}
-        <div className="bg-secondary/50 rounded-lg p-4">
-          <h3 className="text-lg font-medium text-text-primary mb-2">Credits</h3>
-          <p className="text-sm text-text-secondary mb-2">
-            Built with ❤️ for elderly users who deserve accessible technology.
-          </p>
-          <p className="text-xs text-text-secondary">
-            <FaHeart className="inline h-3 w-3 text-red-500" />
-            <span className="ml-1">Designed to make technology more accessible for everyone</span>
-          </p>
         </div>
 
         {/* Legal */}

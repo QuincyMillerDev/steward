@@ -1,12 +1,12 @@
-// Theme context provider for managing UI themes and color schemes - Modular DRY approach
+// Theme context provider for 3-option system (System, Light, Dark)
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { allThemes, type ThemeName, getSystemTheme } from '../lib/themeConfig';
+import { allThemes, type ThemeName, applyThemeVariables } from '../lib/themeConfig';
 
 interface ThemeContextType {
   currentTheme: ThemeName;
   setTheme: (theme: ThemeName) => void;
   availableThemes: { name: ThemeName; label: string }[];
-  isAuto: boolean;
+  isSystem: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -16,7 +16,7 @@ interface ThemeProviderProps {
   defaultTheme?: ThemeName;
 }
 
-export function ThemeProvider({ children, defaultTheme = 'dark-grayscale' }: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = 'system' }: ThemeProviderProps) {
   const [currentTheme, setCurrentTheme] = useState<ThemeName>(defaultTheme);
 
   // Load saved theme on mount
@@ -30,25 +30,15 @@ export function ThemeProvider({ children, defaultTheme = 'dark-grayscale' }: The
   // Apply theme to document
   useEffect(() => {
     const applyTheme = () => {
-      let effectiveTheme: ThemeName;
-      
-      if (currentTheme === 'auto') {
-        effectiveTheme = getSystemTheme();
-      } else {
-        effectiveTheme = currentTheme;
-      }
-      
-      // Set data-theme attribute for CSS selectors
-      document.documentElement.setAttribute('data-theme', effectiveTheme);
-      
-      // Save preference
+      applyThemeVariables(document.documentElement, currentTheme);
+      document.documentElement.setAttribute('data-theme', currentTheme);
       localStorage.setItem('steward-theme', currentTheme);
     };
 
     applyTheme();
 
-    // Listen for system theme changes when in auto mode
-    if (currentTheme === 'auto') {
+    // Listen for system theme changes when in system mode
+    if (currentTheme === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleChange = () => applyTheme();
       
@@ -66,7 +56,7 @@ export function ThemeProvider({ children, defaultTheme = 'dark-grayscale' }: The
       currentTheme,
       setTheme,
       availableThemes: allThemes,
-      isAuto: currentTheme === 'auto',
+      isSystem: currentTheme === 'system',
     }}>
       {children}
     </ThemeContext.Provider>
