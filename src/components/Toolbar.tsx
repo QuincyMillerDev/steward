@@ -32,7 +32,7 @@ export default function Toolbar({
         width: "240px",
         height: "48px",
         borderRadius: "8px",
-        backgroundColor: 'var(--color-secondary)',
+        backgroundColor: 'var(--color-primary)',
         border: '1px solid var(--color-border)',
       }}
     >

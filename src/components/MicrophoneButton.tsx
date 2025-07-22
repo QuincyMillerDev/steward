@@ -1,6 +1,8 @@
 // Microphone button component with recording state indicators
 import { Button } from '@headlessui/react';
-import { HiMicrophone, HiStop } from 'react-icons/hi2';
+import { HiStop } from 'react-icons/hi2';
+import { TbMicrophone } from "react-icons/tb";
+
 
 interface MicrophoneButtonProps {
   isRecording: boolean;
@@ -11,7 +13,7 @@ export default function MicrophoneButton({ isRecording, onClick }: MicrophoneBut
   if (isRecording) {
     return (
       <Button 
-        className="flex items-center justify-center w-8 h-8 rounded transition-all duration-150"
+        className="flex items-center justify-center w-10 h-10 rounded transition-all duration-150"
         style={{
           backgroundColor: 'var(--color-red)',
           color: 'var(--color-text)',
@@ -48,7 +50,7 @@ export default function MicrophoneButton({ isRecording, onClick }: MicrophoneBut
       aria-label="Start recording"
       onClick={onClick}
     >
-      <HiMicrophone className="w-4 h-4" />
+      <TbMicrophone className="w-4 h-4" />
     </Button>
   );
 }
