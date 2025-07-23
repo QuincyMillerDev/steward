@@ -7,7 +7,7 @@ export default function AboutSettings() {
       <div>
         <h2 className="text-xl font-semibold text-text-primary mb-4">About Steward</h2>
         <p className="text-sm text-text-secondary">
-          Steward is an AI desktop assistant designed specifically for elderly users, providing voice-controlled desktop automation through a simple and accessible interface.
+          Steward is an AI desktop assistant providing voice-controlled desktop automation through a simple and accessible interface.
         </p>
       </div>
 

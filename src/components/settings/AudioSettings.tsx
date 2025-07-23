@@ -1,27 +1,22 @@
-// Audio settings component for microphone and audio configuration
-import { useState } from 'react';
+import { useState } from "react"
 
 export default function AudioSettings() {
-  const [microphoneSensitivity, setMicrophoneSensitivity] = useState(75);
-  const [pushToTalk, setPushToTalk] = useState(false);
-  const [pushToTalkKey, setPushToTalkKey] = useState('Space');
+  const [microphoneSensitivity, setMicrophoneSensitivity] = useState(75)
+  const [pushToTalk, setPushToTalk] = useState(false)
+  const [pushToTalkKey, setPushToTalkKey] = useState("Space")
 
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-xl font-semibold text-text-primary mb-4">Audio Settings</h2>
-        <p className="text-sm text-text-secondary">
-          Configure microphone and audio input preferences for optimal voice recognition
-        </p>
+        <h2 className="text-lg font-semibold text-text-primary mb-2">Audio Settings</h2>
+        <p className="text-sm text-text-secondary">Configure microphone and audio input preferences</p>
       </div>
 
       <div className="space-y-6">
         {/* Microphone Sensitivity */}
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-3">
-            Microphone Sensitivity
-          </label>
-          <div className="bg-primary/50 rounded-lg p-4">
+          <label className="block text-sm font-medium text-text-primary mb-3">Microphone Sensitivity</label>
+          <div className="bg-secondary rounded-lg p-4 border border-border">
             <div className="flex items-center space-x-4 mb-2">
               <input
                 type="range"
@@ -29,43 +24,42 @@ export default function AudioSettings() {
                 max="100"
                 value={microphoneSensitivity}
                 onChange={(e) => setMicrophoneSensitivity(Number(e.target.value))}
-                className="flex-1 h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-accent"
+                className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer accent-accent"
               />
-              <span className="text-sm text-text-primary font-medium w-12 text-right">
-                {microphoneSensitivity}%
-              </span>
+              <span className="text-sm text-text-primary font-medium w-12 text-right">{microphoneSensitivity}%</span>
             </div>
             <p className="text-xs text-text-secondary">
-              Higher sensitivity picks up quieter voices but may also capture background noise
+              Higher sensitivity picks up quieter voices but may capture background noise
             </p>
           </div>
         </div>
 
         {/* Push-to-Talk Settings */}
         <div className="space-y-4">
-          <label className="flex items-center space-x-3">
-            <input
-              type="checkbox"
-              checked={pushToTalk}
-              onChange={(e) => setPushToTalk(e.target.checked)}
-              className="h-4 w-4 rounded border-border text-accent focus:ring-2 focus:ring-accent focus:ring-offset-0 bg-primary/50"
-            />
-            <span className="text-sm text-text-primary font-medium">Enable push-to-talk</span>
-          </label>
-          <p className="text-xs text-text-secondary -mt-2 ml-7">
-            Hold a key to activate voice input instead of continuous listening
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <label className="text-sm font-medium text-text-primary">Push-to-talk</label>
+              <p className="text-xs text-text-secondary">Hold a key to activate voice input</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={pushToTalk}
+                onChange={(e) => setPushToTalk(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="relative w-9 h-5 bg-border peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-accent"></div>
+            </label>
+          </div>
 
           {pushToTalk && (
-            <div className="ml-7 space-y-3">
+            <div className="ml-0 space-y-3 bg-secondary/50 rounded-lg p-4 border border-border">
               <div>
-                <label className="block text-sm font-medium text-text-primary mb-2">
-                  Push-to-Talk Key
-                </label>
+                <label className="block text-sm font-medium text-text-primary mb-2">Push-to-Talk Key</label>
                 <select
                   value={pushToTalkKey}
                   onChange={(e) => setPushToTalkKey(e.target.value)}
-                  className="w-full rounded-lg bg-primary/50 border border-border text-text-primary px-4 py-3 focus:border-accent focus:outline-none text-sm"
+                  className="w-full rounded-md bg-primary border border-border text-text-primary px-3 py-2 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                 >
                   <option value="Space">Space</option>
                   <option value="Ctrl">Ctrl</option>
@@ -75,10 +69,13 @@ export default function AudioSettings() {
                   <option value="F2">F2</option>
                 </select>
               </div>
-
-              <div className="bg-secondary/30 rounded-lg p-3">
+              <div className="bg-accent/10 rounded-md p-3">
                 <p className="text-xs text-text-secondary">
-                  <strong>Tip:</strong> Press and hold <kbd className="px-2 py-1 bg-primary/50 rounded text-xs font-mono">{pushToTalkKey}</kbd> while speaking, then release when done
+                  <strong>Tip:</strong> Press and hold{" "}
+                  <kbd className="px-1.5 py-0.5 bg-border rounded text-xs font-mono text-text-primary">
+                    {pushToTalkKey}
+                  </kbd>{" "}
+                  while speaking
                 </p>
               </div>
             </div>
@@ -87,20 +84,16 @@ export default function AudioSettings() {
 
         {/* Audio Device Selection */}
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-3">
-            Microphone Device
-          </label>
-          <select className="w-full rounded-lg bg-primary/50 border border-border text-text-primary px-4 py-3 focus:border-accent focus:outline-none text-sm">
+          <label className="block text-sm font-medium text-text-primary mb-2">Microphone Device</label>
+          <select className="w-full rounded-md bg-secondary border border-border text-text-primary px-3 py-2 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent">
             <option>Default Microphone</option>
             <option>Headset Microphone</option>
             <option>USB Microphone</option>
             <option>System Microphone</option>
           </select>
-          <p className="mt-2 text-xs text-text-secondary">
-            Select which microphone to use for voice input
-          </p>
+          <p className="mt-1 text-xs text-text-secondary">Select which microphone to use for voice input</p>
         </div>
       </div>
     </div>
-  );
+  )
 }

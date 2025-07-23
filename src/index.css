@@ -8,43 +8,45 @@
   --color-border: #404040;
   --color-red: #ef4444;
   --color-red-hover: #dc2626;
-  
-  /* Base font size for elderly users */
-  font-size: 18px;
+
+  /* Base font size - reduced for cleaner look */
+  font-size: 14px;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles for elderly-friendly UI */
+/* Base styles for clean, minimal UI */
 @layer base {
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
   }
-  
+
   html {
-    font-size: 18px; /* Larger base font size for elderly users */
+    font-size: 14px; /* Smaller base font size for modern look */
   }
-  
+
   body {
     background-color: transparent !important;
     color: var(--color-text);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    letter-spacing: 0.025em; /* Slightly wider letter spacing for readability */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    letter-spacing: 0.01em; /* Tighter letter spacing */
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
+
   #root {
     width: 100%;
     height: 100%;
     display: block;
   }
-  
+
   * {
     box-sizing: border-box;
   }
@@ -53,47 +55,65 @@
 /* Component layer for reusable patterns */
 @layer components {
   .btn-primary {
-    @apply bg-accent text-text-primary px-6 py-3 rounded-lg font-medium text-lg;
+    @apply bg-accent text-text-primary px-4 py-2 rounded-md font-medium text-sm;
     @apply hover:opacity-90 active:opacity-80 transition-opacity;
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
     @apply focus:ring-offset-primary;
   }
-  
+
   .btn-secondary {
-    @apply bg-secondary text-text-primary px-6 py-3 rounded-lg font-medium text-lg;
+    @apply bg-secondary text-text-primary px-4 py-2 rounded-md font-medium text-sm;
     @apply border border-border hover:bg-border transition-colors;
     @apply focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2;
     @apply focus:ring-offset-primary;
   }
-  
+
   .card {
-    @apply bg-secondary rounded-xl p-6 border border-border;
+    @apply bg-secondary rounded-lg p-4 border border-border;
   }
-  
+
   .input-field {
-    @apply bg-primary border border-border rounded-lg px-4 py-3 text-lg;
+    @apply bg-secondary border border-border rounded-md px-3 py-2 text-sm;
     @apply text-text-primary placeholder-text-secondary;
-    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+    @apply focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent;
     @apply transition-colors;
   }
 }
 
-/* Utility classes for accessibility and elderly-friendly design */
+/* Utility classes for clean, minimal design */
 @layer utilities {
   .text-readable {
-    @apply text-lg leading-relaxed;
+    @apply text-sm leading-relaxed;
   }
-  
+
   .high-contrast {
     @apply contrast-125;
   }
-  
+
   .focus-visible {
-    @apply focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-1;
     @apply focus:ring-offset-primary;
   }
-  
+
   .clickable-area {
-    @apply min-h-[48px] min-w-[48px]; /* Minimum touch target size */
+    @apply min-h-[36px] min-w-[36px]; /* Smaller minimum touch target */
   }
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }

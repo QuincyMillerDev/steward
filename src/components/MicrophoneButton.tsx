@@ -27,14 +27,14 @@ export default function MicrophoneButton({ isRecording, onClick }: MicrophoneBut
         aria-label="Stop recording"
         onClick={onClick}
       >
-        <HiStop className="w-4 h-4" />
+        <HiStop className="w-6 h-6" />
       </Button>
     );
   }
 
   return (
     <Button 
-      className="flex items-center justify-center w-8 h-8 rounded transition-all duration-150"
+      className="flex items-center justify-center w-10 h-10 rounded transition-all duration-150"
       style={{
         backgroundColor: 'var(--color-accent)',
         color: 'var(--color-text)',
@@ -50,7 +50,7 @@ export default function MicrophoneButton({ isRecording, onClick }: MicrophoneBut
       aria-label="Start recording"
       onClick={onClick}
     >
-      <TbMicrophone className="w-4 h-4" />
+      <TbMicrophone className="w-6 h-6" />
     </Button>
   );
 }

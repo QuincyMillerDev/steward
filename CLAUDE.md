@@ -70,3 +70,6 @@ User Voice → Tauri (Rust) → Python (AI Decision) → Tauri (Rust Execution)
 
 ## Code Style Guidelines
 - Always add a comment to the top of every file with a 1 line description of the file.
+
+## Context & Time
+- The year is 2025. For any time-specific queries, like using perplexity-ask or web search, make sure you specify that the current year is 2025.

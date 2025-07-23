@@ -8,11 +8,9 @@ interface MainWindowProps {
 
 export default function MainWindow({ children }: MainWindowProps) {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="relative">
-        <Toolbar />
-        {children}
-      </div>
+    <div className="w-full h-full">
+      <Toolbar />
+      {children}
     </div>
   );
 }

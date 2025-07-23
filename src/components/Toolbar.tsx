@@ -1,8 +1,9 @@
 // Floating toolbar component with voice control and settings buttons
 import { Button } from '@headlessui/react';
-import { HiCog6Tooth } from 'react-icons/hi2';
+import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { invoke } from '@tauri-apps/api/core';
+import { useEffect, useRef } from 'react';
 import MicrophoneButton from './MicrophoneButton';
 
 interface ToolbarProps {
@@ -16,6 +17,9 @@ export default function Toolbar({
   isRecording = false,
   onRecordClick
 }: ToolbarProps) {
+  const dragRef = useRef<HTMLDivElement>(null);
+  const micRef = useRef<HTMLDivElement>(null);
+  const settingsRef = useRef<HTMLButtonElement>(null);
 
   const handleSettingsClick = async () => {
     try {
@@ -24,6 +28,44 @@ export default function Toolbar({
       console.error('Failed to open settings window:', error);
     }
   };
+
+  // Track interactive regions for click-through behavior
+  const updateClickableRegions = () => {
+    const regions: [number, number, number, number][] = [];
+
+    // Add drag handle region
+    if (dragRef.current) {
+      const rect = dragRef.current.getBoundingClientRect();
+      regions.push([rect.left, rect.top, rect.width, rect.height]);
+    }
+
+    // Add microphone button region
+    if (micRef.current) {
+      const rect = micRef.current.getBoundingClientRect();
+      regions.push([rect.left, rect.top, rect.width, rect.height]);
+    }
+
+    // Add settings button region
+    if (settingsRef.current) {
+      const rect = settingsRef.current.getBoundingClientRect();
+      regions.push([rect.left, rect.top, rect.width, rect.height]);
+    }
+
+    // Send regions to backend
+    invoke('configure_toolbar_click_through', { regions })
+      .catch(error => console.error('Failed to configure click-through:', error));
+  };
+
+  useEffect(() => {
+    // Initial configuration
+    updateClickableRegions();
+
+    // Update on resize
+    const resizeObserver = new ResizeObserver(updateClickableRegions);
+    resizeObserver.observe(document.body);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   return (
     <div 
@@ -37,6 +79,7 @@ export default function Toolbar({
       }}
     >
       <div 
+        ref={dragRef}
         data-tauri-drag-region
         className="flex items-center justify-start h-full cursor-grab select-none"
         style={{
@@ -78,7 +121,7 @@ export default function Toolbar({
         aria-label="Open settings"
         onClick={handleSettingsClick}
       >
-        <HiCog6Tooth className="w-4 h-4" />
+        <HiOutlineCog6Tooth className="w-6 h-6" />
       </Button>
     </div>
   );
