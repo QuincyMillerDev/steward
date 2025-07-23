@@ -3,10 +3,10 @@
 import { useState } from "react"
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react"
 import { FiVolume2, FiCommand, FiSettings, FiInfo } from "react-icons/fi"
-import AudioSettings from "../components/settings/AudioSettings"
-import GeneralSettings from "../components/settings/GeneralSettings"
-import ShortcutsSettings from "../components/settings/ShortcutsSettings"
-import AboutSettings from "../components/settings/AboutSettings"
+import AudioTab from "../tabs/AudioTab"
+import GeneralTab from "../tabs/GeneralTab"
+import ShortcutsTab from "../tabs/ShortcutsTab"
+import AboutTab from "../tabs/AboutTab"
 import { useTheme } from "../contexts/ThemeContext"
 
 function classNames(...classes: string[]) {
@@ -20,67 +20,71 @@ export default function SettingsWindow() {
     {
       name: "General",
       icon: FiSettings,
-      component: GeneralSettings,
+      component: GeneralTab,
     },
     {
       name: "Audio",
       icon: FiVolume2,
-      component: AudioSettings,
+      component: AudioTab,
     },
     {
       name: "Shortcuts",
       icon: FiCommand,
-      component: ShortcutsSettings,
+      component: ShortcutsTab,
     },
     {
       name: "About",
       icon: FiInfo,
-      component: AboutSettings,
+      component: AboutTab,
     },
   ]
 
   const { currentTheme } = useTheme()
 
   return (
-    <div className="h-screen bg-primary text-text-primary transition-colors duration-300" data-theme={currentTheme}>
-      <div className="h-full flex flex-col">
-        {/* Tab Navigation */}
-        <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-          <TabList className="flex border-b border-border bg-primary">
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.name}
-                className={({ selected }) =>
-                  classNames(
-                    "flex items-center justify-center px-4 py-3 text-sm font-medium",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset",
-                    "transition-colors duration-200",
-                    selected
-                      ? "text-accent border-b-2 border-accent bg-secondary/30"
-                      : "text-text-secondary hover:text-text-primary hover:bg-secondary/20",
-                  )
-                }
-              >
-                <tab.icon className="h-4 w-4 mr-2" />
-                <span>{tab.name}</span>
-              </Tab>
-            ))}
-          </TabList>
+    <div className="w-full h-full bg-primary text-text-primary transition-colors duration-300" data-theme={currentTheme}>
+      <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} className="h-full flex flex-col">
+        {/* Tab Navigation - Fixed Header */}
+        <TabList className="flex-shrink-0 flex border-b border-border bg-primary shadow-sm">
+          {tabs.map((tab) => (
+            <Tab
+              key={tab.name}
+              className={({ selected }) =>
+                classNames(
+                  "flex items-center justify-center px-6 py-3 text-sm font-medium min-w-0 flex-1",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset",
+                  "transition-colors duration-200",
+                  selected
+                    ? "text-accent border-b-2 border-accent bg-secondary/30"
+                    : "text-text-secondary hover:text-text-primary hover:bg-secondary/20",
+                )
+              }
+            >
+              <tab.icon className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="truncate">{tab.name}</span>
+            </Tab>
+          ))}
+        </TabList>
 
-          <TabPanels className="flex-1">
-            {tabs.map((tab, index) => (
-              <TabPanel
-                key={tab.name}
-                className={classNames("h-full overflow-y-auto", index === selectedIndex ? "block" : "hidden")}
-              >
-                <div className="max-w-2xl mx-auto p-6">
+        {/* Content Area - Scrollable with proper constraints */}
+        <TabPanels className="flex-1 overflow-hidden">
+          {tabs.map((tab, index) => (
+            <TabPanel
+              key={tab.name}
+              className={classNames(
+                "h-full focus:outline-none",
+                index === selectedIndex ? "flex" : "hidden"
+              )}
+            >
+              <div className="flex-1 overflow-y-auto overflow-x-hidden">
+                <div className="max-w-4xl mx-auto p-6">
                   <tab.component />
                 </div>
-              </TabPanel>
-            ))}
-          </TabPanels>
-        </TabGroup>
-      </div>
+              </div>
+            </TabPanel>
+          ))}
+        </TabPanels>
+      </TabGroup>
     </div>
   )
 }

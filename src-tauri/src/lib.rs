@@ -29,42 +29,11 @@ async fn create_settings_window(app: tauri::AppHandle) -> Result<(), String> {
     Ok(())
 }
 
-/// Configure click-through behavior for transparent toolbar window
-/// Takes array of (x, y, width, height) rectangles for interactive areas
-#[tauri::command]
-fn configure_toolbar_click_through(window: tauri::Window, regions: Vec<(i32, i32, u32, u32)>) -> Result<(), String> {
-    let label = window.label();
-    if label != "toolbar" {
-        return Err("This command only works for toolbar window".to_string());
-    }
-
-    #[cfg(target_os = "linux")]
-    {
-        // For Linux/X11, we'll use the basic approach since direct X11 access is complex
-        // The regions parameter will be used in a future implementation
-        let _ = regions;
-    }
-
-    #[cfg(target_os = "windows")]
-    {
-        // For Windows, we'll use the basic approach for now
-        let _ = regions;
-    }
-
-    #[cfg(target_os = "macos")]
-    {
-        // For macOS, we'll use the basic approach for now
-        let _ = regions;
-    }
-
-    Ok(())
-}
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, create_settings_window, configure_toolbar_click_through])
+        .invoke_handler(tauri::generate_handler![greet, create_settings_window])
         .setup(|app| {
             // Configure toolbar click-through on startup
             if let Some(toolbar_window) = app.get_webview_window("toolbar") {
