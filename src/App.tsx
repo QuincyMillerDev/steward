@@ -1,12 +1,9 @@
 // Main React application component for Steward AI assistant
-import { ThemeProvider } from './contexts/ThemeContext';
-import MainWindow from './windows/MainWindow';
+import ToolbarWindow from './windows/ToolbarWindow';
 
 function App() {
   return (
-    <ThemeProvider>
-      <MainWindow />
-    </ThemeProvider>
+    <ToolbarWindow />
   );
 }
 

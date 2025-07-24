@@ -13,7 +13,6 @@ interface ListboxProps {
   options: ListboxOption[]
   placeholder?: string
   disabled?: boolean
-  className?: string
 }
 
 export default function Listbox({ 
@@ -21,8 +20,7 @@ export default function Listbox({
   onChange, 
   options, 
   placeholder = "Select option",
-  disabled = false,
-  className = ""
+  disabled = false
 }: ListboxProps) {
   const selectedOption = options.find((option) => option.value === value)
 
@@ -31,7 +29,6 @@ export default function Listbox({
       value={value} 
       onChange={onChange}
       disabled={disabled}
-      className={className}
     >
       <div className="relative">
         <ListboxButton className="relative w-full cursor-pointer rounded-md bg-secondary py-2 pl-3 pr-10 text-left text-sm text-text-primary border border-border hover:border-accent/50 focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">

@@ -2,13 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import SettingsWindow from './windows/SettingsWindow';
-import { ThemeProvider } from './contexts/ThemeContext';
+import StateProvider from './components/providers/StateProvider';
+import AlertSystem from './components/alerts/AlertSystem';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <SettingsWindow />
-    </ThemeProvider>
+    <StateProvider>
+      <div className="w-screen h-screen">
+        <SettingsWindow />
+      </div>
+      <AlertSystem position="top-right" />
+    </StateProvider>
   </React.StrictMode>
 );

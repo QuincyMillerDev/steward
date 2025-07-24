@@ -7,7 +7,7 @@ import AudioTab from "../tabs/AudioTab"
 import GeneralTab from "../tabs/GeneralTab"
 import ShortcutsTab from "../tabs/ShortcutsTab"
 import AboutTab from "../tabs/AboutTab"
-import { useTheme } from "../contexts/ThemeContext"
+import { useTheme } from "../store"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -39,10 +39,10 @@ export default function SettingsWindow() {
     },
   ]
 
-  const { currentTheme } = useTheme()
+  const currentTheme = useTheme()
 
   return (
-    <div className="w-full h-full bg-primary text-text-primary transition-colors duration-300" data-theme={currentTheme}>
+    <div className="w-screen h-screen bg-primary text-text-primary transition-colors duration-300" data-theme={currentTheme}>
       <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} className="h-full flex flex-col">
         {/* Tab Navigation - Fixed Header */}
         <TabList className="flex-shrink-0 flex border-b border-border bg-primary shadow-sm">
@@ -72,11 +72,11 @@ export default function SettingsWindow() {
             <TabPanel
               key={tab.name}
               className={classNames(
-                "h-full focus:outline-none",
+                "h-full w-full focus:outline-none",
                 index === selectedIndex ? "flex" : "hidden"
               )}
             >
-              <div className="flex-1 overflow-y-auto overflow-x-hidden">
+              <div className="flex-1 overflow-y-auto overflow-x-hidden w-full h-full">
                 <div className="max-w-4xl mx-auto p-6">
                   <tab.component />
                 </div>

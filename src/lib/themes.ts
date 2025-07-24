@@ -95,3 +95,9 @@ export const applyThemeVariables = (element: HTMLElement, themeName: ThemeName):
     element.style.setProperty('--color-red-hover', colors.redHover);
   }
 };
+
+// Apply theme to document element
+export const applyTheme = (themeName: ThemeName): void => {
+  applyThemeVariables(document.documentElement, themeName);
+  document.documentElement.setAttribute('data-theme', themeName);
+};
