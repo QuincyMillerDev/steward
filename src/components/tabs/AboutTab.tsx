@@ -1,7 +1,7 @@
 // About settings component for app information
 import { FaGithub, FaBook } from 'react-icons/fa'
-import SettingsSection from "../components/settings/SettingsSection"
-import Button from "../components/ui/Button"
+import SettingsSection from "../settings/SettingsSection"
+import Button from "../ui/Button"
 
 export default function AboutTab() {
   return (

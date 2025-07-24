@@ -3,7 +3,7 @@ import { Button } from '@headlessui/react';
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { invoke } from '@tauri-apps/api/core';
-import MicrophoneButton from '../components/MicrophoneButton';
+import MicrophoneButton from '../MicrophoneButton';
 
 interface ToolbarWindowProps {
   status?: string;

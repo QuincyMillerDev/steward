@@ -7,7 +7,7 @@ import AudioTab from "../tabs/AudioTab"
 import GeneralTab from "../tabs/GeneralTab"
 import ShortcutsTab from "../tabs/ShortcutsTab"
 import AboutTab from "../tabs/AboutTab"
-import { useTheme } from "../store"
+import { useTheme } from "../../store"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")

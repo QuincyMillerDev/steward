@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { FiPlus, FiTrash2 } from "react-icons/fi"
-import SettingsSection from "../components/settings/SettingsSection"
-import Switch from "../components/ui/Switch"
-import Button from "../components/ui/Button"
+import SettingsSection from "../settings/SettingsSection"
+import Switch from "../ui/Switch"
+import Button from "../ui/Button"
 
 export default function ShortcutsTab() {
   const [shortcuts, setShortcuts] = useState([

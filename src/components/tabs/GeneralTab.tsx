@@ -1,9 +1,9 @@
-import { useTheme, usePreferences, useSettingsActions } from "../store"
-import SettingsSection from "../components/settings/SettingsSection"
-import SettingsField from "../components/settings/SettingsField"
-import SettingsForm from "../components/settings/SettingsForm"
-import Listbox from "../components/ui/Listbox"
-import { allThemes } from "../lib/themes"
+import { useTheme, usePreferences, useSettingsActions } from "../../store"
+import SettingsSection from "../settings/SettingsSection"
+import SettingsField from "../settings/SettingsField"
+import SettingsForm from "../settings/SettingsForm"
+import Listbox from "../ui/Listbox"
+import { allThemes } from "../../lib/themes"
 
 export default function GeneralTab() {
   const theme = useTheme()

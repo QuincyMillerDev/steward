@@ -1,8 +1,8 @@
 import { useState } from "react"
-import SettingsSection from "../components/settings/SettingsSection"
-import SettingsField from "../components/settings/SettingsField"
-import Switch from "../components/ui/Switch"
-import Listbox from "../components/ui/Listbox"
+import SettingsSection from "../settings/SettingsSection"
+import SettingsField from "../settings/SettingsField"
+import Switch from "../ui/Switch"
+import Listbox from "../ui/Listbox"
 
 export default function AudioTab() {
   const [microphoneSensitivity, setMicrophoneSensitivity] = useState(75)
